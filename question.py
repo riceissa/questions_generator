@@ -3,29 +3,11 @@
 import itertools
 import csv
 
+from lists import lists
+
 #"What is it like to play super smash brothers while on {}?|LSD, marijuana, MDMA, psilocybin"
 # ["What is it like to play super smash brothers while on {}?", ["LSD", "marijuana", "MDMA", "psilocybin"]]
 # -> ["What is it like to play super smash brothers while on LSD?", "What is it like to play super smash brothers while on marijuana?", "What is it like to play super smash brothers while on MDMA?",  "What is it like to play super smash brothers while on psilocybin?"]
-
-# Some commonly-used lists
-lists = {
-    "DRUGS": ["marijuana", "MDAM", "ketamine", "LSD", "psilocybin"],
-    "UNIS": ["University of Washington", "MIT", "Caltech", "Yale", "Harvard", "Harvey Mudd College", "Princeton", "Brown University", "Stanford", "University of Chicago", "UC Berkeley", "UCLA"],
-    "PEOPLE": ["Mark Zuckerberg", "Travis Kalanick", "Jimmy Wales", "Peter Thiel", "Elon Musk", "Noam Chomsky", "Bryan Caplan"]
-    "QUORA_USERS": ["Brian Farley", "Brian Bi", "Alex K. Chen", "Vipul Naik", "Marc Srour", "Michael O. Church"],
-    "PROCONS": ["pros", "cons"],
-    "ANIMALS": ["kakapo", "parrot"],
-    "ANIMALP": ["kakapo", "parrots"],
-}
-def prod(A, B):
-    A = set(A)
-    B = set(B)
-    B = B.difference(A)
-    result = []
-    for i in itertools.product(A, B):
-        if len(i) == len(set(i)):
-            result.append(i)
-    return result
 
 def make_question_compts(file_obj):
     result = []
@@ -46,19 +28,21 @@ def generate_questions(question_compts):
         result = question_compts
     else:
         result = []
-        print("sane")
         if len(question_compts) == 3 and question_compts[1] == question_compts[2]:
-            for i in question_compts[1]:
-                for j in question_compts[2]
-                FIXME
+            for n, v in enumerate(question_compts[1]):
+                for m, w in enumerate(question_compts[2][n + 1:]):
+                    try:
+                        result.append(question_compts[0].format(v, w))
+                    except (ValueError, IndexError):
+                        pass
         else:
             for i in itertools.product(*question_compts[1:]):
-                try:
-                    if len(i) == len(set(i)):
-                        # So we don't ask a question with overlapping parameters
+                if len(i) == len(set(i)):
+                    # So we don't ask a question with overlapping parameters
+                    try:
                         result.append(question_compts[0].format(*i))
-                except (ValueError, IndexError):
-                    pass
+                    except (ValueError, IndexError):
+                        pass
     return result
 
 if __name__ == "__main__":
@@ -68,7 +52,11 @@ if __name__ == "__main__":
     #print(generate_questions([]))
 
     with open("data.txt", "r") as f:
+        count = 0
         compts_list = make_question_compts(f)
-        print(compts_list)
+        #print(compts_list)
         for i in compts_list:
-            print(generate_questions(i))
+            questions = generate_questions(i)
+            count += len(questions)
+            print(questions)
+            print("{} questions were generated".format(str(count)))
