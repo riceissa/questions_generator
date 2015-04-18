@@ -10,6 +10,11 @@ from lists import lists
 # -> ["What is it like to play super smash brothers while on LSD?", "What is it like to play super smash brothers while on marijuana?", "What is it like to play super smash brothers while on MDMA?",  "What is it like to play super smash brothers while on psilocybin?"]
 
 def make_question_compts(file_obj):
+    '''
+    Take file object and return a list of lists, where each element in
+    the overall list has a string (base question) followed by any number
+    of lists, each containing strings.
+    '''
     result = []
     reader = csv.reader(file_obj, delimiter='|')
     for row in reader:
@@ -53,10 +58,14 @@ if __name__ == "__main__":
 
     with open("data.txt", "r") as f:
         count = 0
+        all_questions = []
         compts_list = make_question_compts(f)
         #print(compts_list)
         for i in compts_list:
             questions = generate_questions(i)
             count += len(questions)
-            print(questions)
-            print("{} questions were generated".format(str(count)))
+            all_questions.extend(questions)
+            #print(questions)
+        for i in all_questions:
+            print(i)
+        print("{} questions were generated".format(str(count)))

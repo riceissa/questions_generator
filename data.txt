@@ -26,7 +26,7 @@ To what extent does {} have a cult following? | NOBEL
 How many books have been written about {}? | NOBEL
 What is it like to do {} with {}? | DRUG | NOBEL
 What is it like to watch a lecture by {} while on {}? | NOBEL | DRUG
-How well does {} speak English? | NOBEL
 Is {} a good role-model? | NOBEL
 How would {} approach grad school admissions? | NOBEL
 What are the best anecdotes about {}? | NOBEL
+How can {} be disrupted? | lawns, premeds, antique stores
