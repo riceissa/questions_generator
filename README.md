@@ -15,6 +15,10 @@ using additional columns, like so:
 What is it like to give {} {}? | dogs, cats | apples, oranges
 ```
 
+You can define custom lists in `lists.py`, which will be treated like
+comma-separeted strings. (See `data.txt` and `lists.py` for how these
+are used together.)
+
 You can also turn on reporting of number of answers with the `-n` flag.
 Also if you don't specify and input file, you can read from stdin and
 then press `Ctrl`-`d` when you're done with input.  Example:
