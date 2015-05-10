@@ -1,19 +1,24 @@
 #!/bin/python3
 
+import argparse
 import itertools
 import csv
+import sys
 
 from lists import lists
-
-#"What is it like to play super smash brothers while on {}?|LSD, marijuana, MDMA, psilocybin"
-# ["What is it like to play super smash brothers while on {}?", ["LSD", "marijuana", "MDMA", "psilocybin"]]
-# -> ["What is it like to play super smash brothers while on LSD?", "What is it like to play super smash brothers while on marijuana?", "What is it like to play super smash brothers while on MDMA?",  "What is it like to play super smash brothers while on psilocybin?"]
 
 def make_question_compts(file_obj):
     '''
     Take file object and return a list of lists, where each element in
     the overall list has a string (base question) followed by any number
     of lists, each containing strings.
+
+    Example result:
+
+    [['What is it like to be {}?', ['Mark Zuckerberg', 'Travis
+    Kalanick', 'Jimmy Wales', 'Peter Thiel', 'Elon Musk', 'Noam
+    Chomsky', 'Bryan Caplan']], ['How can {} be disrupted?', ['museums',
+    'zoos']]]
     '''
     result = []
     reader = csv.reader(file_obj, delimiter='|')
@@ -29,11 +34,22 @@ def make_question_compts(file_obj):
     return result
 
 def generate_questions(question_compts):
+    '''
+    Produce a list of actual questions.
+    '''
     if len(question_compts) <= 1:
         result = question_compts
     else:
         result = []
         if len(question_compts) == 3 and question_compts[1] == question_compts[2]:
+            # So questions of the type "What do PERSON and PERSON think
+            # of each other?", where we want to avoid asking "What do
+            # Mark Zuckerberg and Mark Zuckerberg think of each other?"
+            # and so on. Here questions are considered to be the same
+            # even when they have a different order.  Note that we can't
+            # tell the difference between questions where the order
+            # matters and when it doesn't; we just assume the order
+            # doesn't matter.
             for n, v in enumerate(question_compts[1]):
                 for m, w in enumerate(question_compts[2][n + 1:]):
                     try:
@@ -56,16 +72,20 @@ if __name__ == "__main__":
     #print(generate_questions(["What is it like to {} at {}?", ["have sex", "become depressed"], unis]))
     #print(generate_questions([]))
 
-    with open("data.txt", "r") as f:
-        count = 0
-        all_questions = []
-        compts_list = make_question_compts(f)
-        #print(compts_list)
-        for i in compts_list:
-            questions = generate_questions(i)
-            count += len(questions)
-            all_questions.extend(questions)
-            #print(questions)
-        for i in all_questions:
-            print(i)
+    parser = argparse.ArgumentParser(description="Generate questions based on patterns and lists")
+    parser.add_argument("input_file", nargs="?", type=argparse.FileType("r"), default=sys.stdin, help="input file; default to stdin")
+    parser.add_argument("-n", "--number", action="store_true", help="report number of questions generated as final line")
+    args = parser.parse_args()
+    count = 0
+    all_questions = []
+    compts_list = make_question_compts(args.input_file)
+    print(compts_list)
+    for i in compts_list:
+        questions = generate_questions(i)
+        count += len(questions)
+        all_questions.extend(questions)
+        #print(questions)
+    for i in all_questions:
+        print(i)
+    if args.number:
         print("{} questions were generated".format(str(count)))
