@@ -79,12 +79,10 @@ if __name__ == "__main__":
     count = 0
     all_questions = []
     compts_list = make_question_compts(args.input_file)
-    print(compts_list)
     for i in compts_list:
         questions = generate_questions(i)
         count += len(questions)
         all_questions.extend(questions)
-        #print(questions)
     for i in all_questions:
         print(i)
     if args.number:
