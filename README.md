@@ -26,7 +26,7 @@ comma-separeted strings. (See `data.txt` and `lists.py` for how these
 are used together.)
 
 You can also turn on reporting of number of answers with the `-n` flag.
-Also if you don't specify and input file, you can read from stdin and
+Also if you don't specify an input file, you can read from stdin and
 then press `Ctrl`-`d` when you're done with input.  Example:
 
 ```bash
