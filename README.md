@@ -13,6 +13,12 @@ variable using additional columns, like so:
 
 ```
 What is it like to give {} {}? | dogs, cats | apples, oranges
+# Output:
+# What is it like to give dogs apples?
+# What is it like to give dogs oranges?
+# What is it like to give cats apples?
+# What is it like to give cats oranges?
+
 ```
 
 You can define custom lists in `lists.py`, which will be treated like
