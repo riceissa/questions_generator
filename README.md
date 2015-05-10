@@ -6,7 +6,8 @@ Run with Python 3 as follows:
 python3 question.py data.txt
 ```
 
-You can also turn on reporting of number of answers with the `-n` flag. Example:
+You can also turn on reporting of number of answers with the `-n` flag.
+Example:
 
 ```bash
 $ python3 question.py -n
