@@ -2,9 +2,9 @@
 # Some commonly-used lists
 lists = {
     "DRUG": ["marijuana", "MDAM", "ketamine", "LSD", "psilocybin"],
-    "UNIS": ["University of Washington", "MIT", "Caltech", "Yale", "Harvard", "Harvey Mudd College", "Princeton", "Brown University", "Stanford", "University of Chicago", "UC Berkeley", "UCLA"],
-    "PEOPLE": ["Mark Zuckerberg", "Travis Kalanick", "Jimmy Wales", "Peter Thiel", "Elon Musk", "Noam Chomsky", "Bryan Caplan"],
-    "QUORA_USERS": ["Brian Farley", "Brian Bi", "Alex K. Chen", "Vipul Naik", "Marc Srour", "Michael O. Church"],
+    "UNI": ["University of Washington", "MIT", "Caltech", "Yale", "Harvard", "Harvey Mudd College", "Princeton", "Brown University", "Stanford", "University of Chicago", "UC Berkeley", "UCLA"],
+    "PERSON": ["Mark Zuckerberg", "Travis Kalanick", "Jimmy Wales", "Peter Thiel", "Elon Musk", "Noam Chomsky", "Bryan Caplan"],
+    "QUORA_USER": ["Brian Farley", "Brian Bi", "Alex K. Chen", "Vipul Naik", "Marc Srour", "Michael O. Church"],
     "PROCONS": ["pros", "cons"],
     "ANIMAL": ["kakapo", "parrot"],
     "ANIMALS": ["kakapo", "parrots"],
